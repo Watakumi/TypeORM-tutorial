@@ -12,5 +12,5 @@ export class User {
   firstName: string;
 
   @Column('varchar')
-  lastName;
+  lastName: string;
 }
