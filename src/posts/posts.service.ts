@@ -45,4 +45,8 @@ export class PostsService {
     }
     return this.postsRepository.save(post);
   }
+
+  async remove(id: string): Promise<void> {
+    await this.postsRepository.delete(id);
+  }
 }
