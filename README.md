@@ -24,7 +24,14 @@
 
 ## Description
 
-NestJSを使用したAPIサーバー構築のためのチュートリアル。
+NestJS を使用した API サーバー構築のためのチュートリアル。
+
+## Environment
+
+- TypeScript
+- NestJS
+- MySQL
+- Docker
 
 ## Installation
 
