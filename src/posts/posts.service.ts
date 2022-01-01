@@ -4,6 +4,7 @@ import { User } from 'src/users/user.entity';
 import { Repository } from 'typeorm';
 import { CreatePostDto } from './create-post.dto';
 import { Post } from './post.entity';
+import { UpdatePostDto } from './update-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -22,7 +23,7 @@ export class PostsService {
     return post;
   }
 
-  async create(userId: string, createPostDto: CreatePostDto) {
+  async create(userId: string, createPostDto: CreatePostDto): Promise<Post> {
     const user = await this.usersRepository.findOne(userId);
     if (!user) {
       throw new NotFoundException(`User #${userId} is not found`);
@@ -31,6 +32,17 @@ export class PostsService {
       ...createPostDto,
       user,
     });
+    return this.postsRepository.save(post);
+  }
+
+  async update(id: string, updatePostDto: UpdatePostDto): Promise<Post> {
+    const post = await this.postsRepository.preload({
+      id: +id,
+      ...updatePostDto,
+    });
+    if (!post) {
+      throw new NotFoundException(`Post #${id} is not found`);
+    }
     return this.postsRepository.save(post);
   }
 }

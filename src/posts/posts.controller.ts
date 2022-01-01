@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { User } from 'src/users/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { CreatePostDto } from './create-post.dto';
 import { Post as PostEntity } from './post.entity';
-
 import { PostsService } from './posts.service';
+import { UpdatePostDto } from './update-post.dto';
 
 @Controller('users/:userId/posts')
 export class PostsController {
@@ -28,5 +28,13 @@ export class PostsController {
     @Body() createPostDto: CreatePostDto,
   ): Promise<PostEntity> {
     return this.postsService.create(userId, createPostDto);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updatePostDto: UpdatePostDto,
+  ): Promise<PostEntity> {
+    return this.postsService.update(id, updatePostDto);
   }
 }
