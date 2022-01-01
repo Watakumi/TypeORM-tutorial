@@ -42,4 +42,14 @@ export class UsersService {
   async remove(id: string): Promise<void> {
     await this.usersRepository.delete(id);
   }
+
+  async findOneWithPosts(id: string) {
+    const userWithPosts = await this.usersRepository.findOne(id, {
+      relations: ['posts'],
+    });
+    if (!userWithPosts) {
+      throw new NotFoundException(`User #${id} is not found`);
+    }
+    return userWithPosts;
+  }
 }
