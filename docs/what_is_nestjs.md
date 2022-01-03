@@ -73,3 +73,7 @@ Sample Controller returns this.
 と返ってくると思います。
 
 ### Providers
+
+NestJS では、Service、Repository, Facyory, Helper などの基本的なクラスは Providers として扱われます。
+
+それらの依存関係をドメインごとにまとめ、依存関係を整理する役目を持つのが Providers です。
